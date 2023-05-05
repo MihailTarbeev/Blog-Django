@@ -1,0 +1,40 @@
+{% extends 'base.html.' %}
+<!--тег static нужно подключать для каждого шаблона индивидуально -->
+{% load static %}
+
+{% block title %}Поиск :: {{ block.super }} {% endblock %}
+
+{% block content %}
+
+<div class="container" style="border-bottom: 1px solid #40c4ff;"></div>
+<section class="blog-post-area">
+    <div class="container">
+        <div class="row">
+            <div class="blog-post-area-style">
+
+
+                {% for post in posts %}
+                <div class="col-md-3">
+                    <div class="single-post">
+
+                        {% if post.photo %}
+                        <img src="{{ post.photo.url }}" height="201" alt="{{ post.title }}">
+                        {% else %}
+                        <img src="https://picsum.photos/id/1/300/201" alt="{{ post.title }}">
+                        {% endif %}
+
+                        <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+                        <h4><span>Автор: <span class="author-name">{{ post.author }}</span></span></h4>
+                        <p>{{ post.content|safe|truncatewords_html:25|linebreaksbr }}</p>
+                        <h4><span>{{ post.created_at|date:"j E o" }}</span></h4>
+                    </div>
+                </div>
+                {% empty %}
+                <h1>По Вашему запросу ничего не найдено</h1>
+                {% endfor %}
+            </div>
+        </div>
+        {% include 'inc/_pagination.html' %}
+    </div>
+</section>
+{% endblock %}
