@@ -26,13 +26,11 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
-    # Метод, который поможет нам сформировывать корректные ссылки
     def get_absolute_url(self):
         return reverse('category', kwargs={"slug": self.slug})
 
     class Meta:
         ordering = ['title']
-        # Название модели в админке
         verbose_name = 'Категория(ю)'
         verbose_name_plural = 'Категории'
 
@@ -46,11 +44,9 @@ class Tag(models.Model):
 
     class Meta:
         ordering = ['title']
-        # Название модели в админке
         verbose_name = 'Тэг'
         verbose_name_plural = 'Тэги'
 
-    # Метод, который поможет нам сформировывать корректные ссылки
     def get_absolute_url(self):
         return reverse('tag', kwargs={"slug": self.slug})
 
@@ -69,13 +65,11 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-    # Метод, который поможет нам сформировывать корректные ссылки
     def get_absolute_url(self):
         return reverse('post', kwargs={"slug": self.slug})
 
     class Meta:
         ordering = ['-created_at']
-        # Название модели в админке
         verbose_name = 'Статья(ю)'
         verbose_name_plural = 'Статьи'
 

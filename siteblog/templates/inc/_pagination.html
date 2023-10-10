@@ -1,4 +1,3 @@
-<!--Проверяем, есть ли другие страницы в нашей пагинации, чтобы не выводить только одну-->
 {% if page_obj.has_other_pages %}
 <div class="pegination">
     <div class="nav-links">
@@ -8,7 +7,6 @@
 
 
         {% for p in page_obj.paginator.page_range %}
-        <!--Если перебираемый номер равняется номеру текущей странички, то-->
         {% if page_obj.number == p %}
         <span class="page-numbers current">{{ p }}</span>
         {% elif p > page_obj.number|add:'-3' and p < page_obj.number|add:'3' %}

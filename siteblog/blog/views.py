@@ -20,7 +20,6 @@ class PostsByCategory(ListView):
     template_name = 'blog/index.html'
     context_object_name = 'posts'
     paginate_by = 4
-    # При запросе пустой категории выдаст ошибку
     allow_empty = False
 
     def get_queryset(self):
@@ -41,7 +40,6 @@ class GetPost(DetailView):
         context = super().get_context_data(**kwargs)
         self.object.views = F('views') + 1
         self.object.save()
-        # Перезапрашиваем данные для корректной информации о views
         self.object.refresh_from_db()
         return context
 
@@ -50,7 +48,6 @@ class PostsByTag(ListView):
     template_name = 'blog/index.html'
     context_object_name = 'posts'
     paginate_by = 1
-    # При запросе пустой категории выдаст ошибку
     allow_empty = False
 
     def get_queryset(self):
@@ -72,7 +69,5 @@ class Search(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Передаём в контекст 's' строку 's={запрос из input-а}&' для корректной работы пагинации
         context['s'] = f"s={self.request.GET.get('s')}&"
-        # Теперь мы можем в нашем шаблоне добавить 's' в пагинацию
         return context

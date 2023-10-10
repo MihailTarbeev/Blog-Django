@@ -1,5 +1,4 @@
 {% extends 'base.html.' %}
-<!--тег static нужно подключать для каждого шаблона индивидуально -->
 {% load static %}
 
 {% block title %} {{ title }} :: {{ block.super }} {% endblock %}
@@ -30,7 +29,7 @@
                         {% if post.photo %}
                         <img src="{{ post.photo.url }}" height="201" alt="{{ post.title }}">
                         {% else %}
-                        <img src="https://picsum.photos/id/1/300/201" alt="{{ post.title }}">
+                        <img src="{% static 'img/default_image.jpg' %}" alt="{{ post.title }}">
                         {% endif %}
 
                         <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
